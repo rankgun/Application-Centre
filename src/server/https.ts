@@ -39,8 +39,8 @@ function fetchCentreData(player: Player): ApiResponse | undefined {
 
 		return decodedBody;
 	} catch (error) {
-		logger.error("Failed to fetch rank centre.", { error });
-		remotes.raiseError.fire(player, { description: "Failed to fetch rank centre.", visible: true });
+		logger.error("Failed to fetch application centre.", { error });
+		remotes.raiseError.fire(player, { description: "Failed to fetch application centre.", visible: true });
 	}
 }
 

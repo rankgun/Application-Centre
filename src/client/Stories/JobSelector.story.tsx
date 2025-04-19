@@ -22,12 +22,13 @@ const story = {
 		return (
 			<Background jobId={props.controls.jobId}>
 				<ApplicationFrame>
-					<ListScrollingFrame>
+					<ListScrollingFrame onClick={() => print("This does not matter.")}>
 						<JobFrame
 							appId={props.controls.appId}
 							name={props.controls.name}
 							desc={props.controls.desc}
 							minrank={props.controls.minRank}
+							onClick={() => print("This does not matter.")}
 						/>
 					</ListScrollingFrame>
 				</ApplicationFrame>

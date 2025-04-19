@@ -1,6 +1,6 @@
 import React from "@rbxts/react";
 
-export function ApplicationFrame({ children }: React.PropsWithChildren) {
+export function ApplicationFrame(children: React.PropsWithChildren) {
 	return (
 		<frame
 			AnchorPoint={new Vector2(0.5, 0.5)}

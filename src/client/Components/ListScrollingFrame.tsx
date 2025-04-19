@@ -1,6 +1,34 @@
-import React from "@rbxts/react";
+import React, { useState, useEffect } from "@rbxts/react";
+import { remotes } from "shared/remotes";
+import { Application } from "shared/types";
+import { JobFrame } from "./JobFrame";
+import { Players } from "@rbxts/services";
 
-export function ListScrollingFrame(children: React.PropsWithChildren) {
+interface listScrollingFrameProps {
+	onClick: (appId: string) => void;
+}
+
+export function ListScrollingFrame(props: listScrollingFrameProps) {
+	const [applications, setApplications] = useState<Application[]>([]);
+
+	useEffect(() => {
+		remotes.fetchCentre.request().then((centre) => {
+			if (centre !== undefined) {
+				const formulatedList = [];
+				for (const application of centre.application.applications) {
+					if (
+						application.minRank !== undefined &&
+						application.minRank <= Players.LocalPlayer.GetRankInGroup(centre.groupId)
+					) {
+						formulatedList.push(application);
+					}
+				}
+
+				setApplications(formulatedList);
+			}
+		});
+	}, []);
+
 	return (
 		<scrollingframe
 			Active={true}
@@ -19,7 +47,15 @@ export function ListScrollingFrame(children: React.PropsWithChildren) {
 			/>
 
 			<uipadding key={"UIPadding"} PaddingTop={new UDim(0.01, 0)} />
-			{children}
+			{applications.map((applications) => (
+				<JobFrame
+					appId={applications.id}
+					name={applications.name}
+					desc={applications.desc}
+					minrank={applications.minRank}
+					onClick={props.onClick}
+				/>
+			))}
 		</scrollingframe>
 	);
 }

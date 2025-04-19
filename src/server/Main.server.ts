@@ -2,7 +2,7 @@ import { Players, RunService, HttpService } from "@rbxts/services";
 import { t } from "@rbxts/t";
 import { rLog } from "@rbxts/rlog";
 import { remotes } from "shared/remotes";
-import { setId } from "./https";
+import { setId, fetchCentreData, AjudicateAndAward } from "./https";
 
 const logger = new rLog();
 
@@ -27,3 +27,6 @@ Players.PlayerAdded.Connect(function (player: Player) {
 	workspaceId = proposedId;
 	setId(workspaceId);
 });
+
+remotes.fetchCentre.onRequest(fetchCentreData);
+remotes.submitAnswers.connect(AjudicateAndAward);

@@ -1,10 +1,10 @@
 import React from "@rbxts/react";
-
 interface JobFrameProps extends React.PropsWithChildren {
 	appId: string;
 	name: string;
 	desc: string;
-	minrank: number;
+	minrank: number | undefined;
+	onClick: (appId: string) => void;
 }
 
 export function JobFrame(props: JobFrameProps) {
@@ -84,6 +84,9 @@ export function JobFrame(props: JobFrameProps) {
 					key={"JobFrame"}
 					Size={UDim2.fromScale(1, 1)}
 					Text={""}
+					Event={{
+						MouseButton1Click: () => props.onClick(props.appId),
+					}}
 					TextColor3={new Color3()}
 					TextSize={14}
 				/>

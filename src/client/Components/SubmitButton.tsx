@@ -1,6 +1,10 @@
 import React from "@rbxts/react";
 
-export function Submit() {
+interface SubmitButtonProps {
+	onClick: () => void;
+}
+
+export function Submit(props: SubmitButtonProps) {
 	return (
 		<frame
 			AnchorPoint={new Vector2(0.5, 1)}
@@ -9,7 +13,7 @@ export function Submit() {
 			key={"SubmitFrame"}
 			Position={UDim2.fromScale(0.5, 1)}
 			Selectable={true}
-			Visible={false}
+			Visible={true}
 			Size={UDim2.fromScale(0.223721, 0.174187)}
 		>
 			<uicorner key={"UICorner"} CornerRadius={new UDim(0.15, 0)} />
@@ -63,6 +67,9 @@ export function Submit() {
 				Text={""}
 				TextColor3={new Color3()}
 				TextSize={14}
+				Event={{
+					MouseButton1Click: props.onClick,
+				}}
 			/>
 		</frame>
 	);

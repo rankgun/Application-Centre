@@ -19,7 +19,7 @@ You may want to have [Ui Labs](https://pepeeltoro41.github.io/ui-labs/) installe
 Setup secrets: 
 
 ```json
-{"API_URL": ["http://localhost:8000/", "*"],"API_KEY": ["wez0TBV!gmr@xez6xcz", "*"]}
+{"API_URL": ["http://localhost:8000", "*"],"API_KEY": ["wez0TBV!gmr@xez6xcz", "*"]}
 ```
 
 ## Tests 

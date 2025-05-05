@@ -37,7 +37,7 @@ export function ListScrollingFrame(props: listScrollingFrameProps) {
 			key={"ListScrollingFrame"}
 			Position={UDim2.fromScale(0.474563, 0.477407)}
 			ScrollBarThickness={2}
-			Size={UDim2.fromScale(1.00727, 0.740803)}
+			Size={UDim2.fromScale(1.5, 0.740803)}
 		>
 			<uilistlayout
 				key={"UIListLayout"}

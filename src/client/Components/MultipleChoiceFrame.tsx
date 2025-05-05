@@ -21,7 +21,7 @@ export default function MultipleChoiceFrame(props: MultipleChoiceFrame) {
 			BackgroundTransparency={1}
 			key={"MultipleChoiceFrame"}
 			Position={UDim2.fromScale(0.5, 0.505814)}
-			Size={UDim2.fromScale(1, 0.65348)}
+			Size={UDim2.fromScale(1.5, 0.65348)}
 		>
 			<uicorner key={"UICorner"} CornerRadius={new UDim(0.1, 0)} />
 			<uistroke key={"UIStroke"} Color={new Color3(1, 1, 1)} Thickness={0.6} />

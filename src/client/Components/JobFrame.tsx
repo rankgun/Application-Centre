@@ -76,7 +76,12 @@ export function JobFrame(props: JobFrameProps) {
 					<uitextsizeconstraint key={"UITextSizeConstraint"} />
 				</textlabel>
 
-				<uiaspectratioconstraint key={"UIAspectRatioConstraint"} AspectRatio={4.35479} />
+				<uiaspectratioconstraint
+					key={"UIAspectRatioConstraint"}
+					AspectRatio={2.08}
+					AspectType={"ScaleWithParentSize"}
+					DominantAxis={"Width"}
+				/>
 
 				<textbutton
 					BackgroundTransparency={1}

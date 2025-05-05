@@ -28,19 +28,6 @@ function Background({ jobId, children }: BackgroundProps) {
 				<uitextsizeconstraint key={"UITextSizeConstraint"} />
 			</textlabel>
 
-			<textlabel
-				AnchorPoint={new Vector2(0.5, 0.5)}
-				BackgroundTransparency={1}
-				FontFace={new Font("rbxasset://fonts/families/Roboto.json")}
-				key={"HelpText"}
-				Position={UDim2.fromScale(0.499786, 0.93904)}
-				Size={UDim2.fromScale(0.259283, 0.0353177)}
-				Text={"Need help? Join our community support server."}
-				TextColor3={new Color3(1, 1, 1)}
-				TextScaled={true}
-			>
-				<uitextsizeconstraint key={"UITextSizeConstraint"} />
-			</textlabel>
 
 			<imagelabel
 				AnchorPoint={new Vector2(0.5, 0.5)}

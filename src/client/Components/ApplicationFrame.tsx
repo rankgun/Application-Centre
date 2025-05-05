@@ -43,7 +43,12 @@ export function ApplicationFrame(children: React.PropsWithChildren) {
 				<uiaspectratioconstraint key={"UIAspectRatioConstraint"} AspectRatio={75.75} />
 			</imagelabel>
 
-			<uiaspectratioconstraint key={"UIAspectRatioConstraint"} AspectRatio={2.10125} />
+			<uiaspectratioconstraint
+				key={"UIAspectRatioConstraint"}
+				AspectRatio={1.19}
+				AspectType={"ScaleWithParentSize"}
+				DominantAxis={"Width"}
+			/>
 			{children}
 		</frame>
 	);

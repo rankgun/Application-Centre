@@ -77,7 +77,11 @@ function Success() {
 					<uiaspectratioconstraint key={"UIAspectRatioConstraint"} AspectRatio={75.75} />
 				</imagelabel>
 
-				<uiaspectratioconstraint key={"UIAspectRatioConstraint"} AspectRatio={2.74169} />
+				<uiaspectratioconstraint
+					key={"UIAspectRatioConstraint"}
+					AspectRatio={1.73}
+					AspectType={"ScaleWithParentSize"}
+				/>
 			</frame>
 		</frame>
 	);
@@ -157,7 +161,11 @@ function Error() {
 					<uiaspectratioconstraint key={"UIAspectRatioConstraint"} AspectRatio={75.75} />
 				</imagelabel>
 
-				<uiaspectratioconstraint key={"UIAspectRatioConstraint"} AspectRatio={2.74169} />
+				<uiaspectratioconstraint
+					key={"UIAspectRatioConstraint"}
+					AspectRatio={1.73}
+					AspectType={"ScaleWithParentSize"}
+				/>
 			</frame>
 		</frame>
 	);

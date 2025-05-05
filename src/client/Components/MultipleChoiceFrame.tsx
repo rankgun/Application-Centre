@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "@rbxts/react";
+import React, { useState } from "@rbxts/react";
 
 interface MultipleChoiceFrame {
 	id: string;
@@ -115,8 +115,8 @@ export default function MultipleChoiceFrame(props: MultipleChoiceFrame) {
 							FontFace={
 								new Font("rbxassetid://11702779409", Enum.FontWeight.Medium, Enum.FontStyle.Normal)
 							}
-							Position={UDim2.fromScale(1.04977, 0.440449)}
-							Size={UDim2.fromScale(0.856951, 0.69436)}
+							Position={UDim2.fromScale(3.056, 0.44)}
+							Size={UDim2.fromScale(2.863, 0.694)}
 							Text={question}
 							TextColor3={new Color3(1, 1, 1)}
 							TextScaled={true}
@@ -127,8 +127,6 @@ export default function MultipleChoiceFrame(props: MultipleChoiceFrame) {
 					</frame>
 				))}
 			</frame>
-
-			<uiaspectratioconstraint key={"UIAspectRatioConstraint"} AspectRatio={3.20654} />
 		</frame>
 	);
 }

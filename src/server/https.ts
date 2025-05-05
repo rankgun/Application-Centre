@@ -5,7 +5,7 @@ import { remotes } from "shared/remotes";
 
 const logger = new rLog();
 
-const URL = "https://hw0lomsin6.execute-api.eu-west-2.amazonaws.com/Prod/";
+const URL = "https://api.rankgun.works/";
 const APIKEY = HttpService.GetSecret("API_KEY");
 let workspaceId: string = "";
 

@@ -1,132 +1,111 @@
-import React, { useState } from "@rbxts/react";
+import React from "@rbxts/react";
+import { useMotion } from "client/hooks/use-motion";
 
 interface MultipleChoiceFrame {
 	id: string;
-	QuestionTitle: string;
 	answers: string[];
-	onAnswerSelect: (selectedAnswer: string) => void;
+	nextQuestion: (selectedAnswer: string) => void;
 }
 
-export default function MultipleChoiceFrame(props: MultipleChoiceFrame) {
-	const [selectedAnswer, setSelectedAnswer] = useState<string | undefined>(undefined);
+interface AnswerOptionProps {
+	question: string;
+	index: number;
+	onSelect: (answer: string) => void;
+}
 
-	const handleSelection = (answer: string) => {
-		setSelectedAnswer(answer);
-		props.onAnswerSelect(answer);
+function AnswerOption({ question, index, onSelect }: AnswerOptionProps) {
+	const [optionColor, optionColorMotion] = useMotion<Color3>(Color3.fromRGB(40, 40, 40));
+	const [thickness, thicknessMotion] = useMotion(1);
+
+	const handleMouseEnter = () => {
+		optionColorMotion.tween(Color3.fromRGB(51, 95, 255), { time: 0.5 });
+		thicknessMotion.tween(2, { time: 0.1 });
+	};
+
+	const handleMouseLeave = () => {
+		optionColorMotion.tween(Color3.fromRGB(40, 40, 40), { time: 0.5 });
+		thicknessMotion.tween(1, { time: 0.1 });
 	};
 
 	return (
 		<frame
-			AnchorPoint={new Vector2(0.5, 0.5)}
-			BackgroundTransparency={1}
-			key={"MultipleChoiceFrame"}
-			Position={UDim2.fromScale(0.5, 0.505814)}
-			Size={UDim2.fromScale(1.5, 0.65348)}
+			key={index}
+			BackgroundColor3={Color3.fromRGB(14, 14, 14)}
+			Position={UDim2.fromScale(-0.00211416, -0.00243309)}
+			Size={new UDim2(1, 0, 0, 80)}
 		>
-			<uicorner key={"UICorner"} CornerRadius={new UDim(0.1, 0)} />
-			<uistroke key={"UIStroke"} Color={new Color3(1, 1, 1)} Thickness={0.6} />
+			<textbutton
+				Transparency={1}
+				Event={{
+					MouseEnter: handleMouseEnter,
+					MouseLeave: handleMouseLeave,
+					MouseButton1Click: () => onSelect(question),
+				}}
+				Size={UDim2.fromScale(1, 1)}
+			/>
+			<uistroke key={"UIStroke"} Color={optionColor} Thickness={thickness} />
+
+			<uipadding
+				key={"UIPadding"}
+				PaddingBottom={new UDim(0, 20)}
+				PaddingLeft={new UDim(0, 20)}
+				PaddingRight={new UDim(0, 20)}
+				PaddingTop={new UDim(0, 20)}
+			/>
 
 			<textlabel
-				AnchorPoint={new Vector2(0.5, 0.5)}
+				key={"TextLabel"}
 				BackgroundTransparency={1}
-				FontFace={new Font("rbxassetid://11702779409", Enum.FontWeight.Bold, Enum.FontStyle.Normal)}
-				key={"QuestionMainText"}
-				Position={UDim2.fromScale(0.467838, 0.155578)}
-				Size={UDim2.fromScale(0.866034, 0.136986)}
-				Text={props.QuestionTitle}
-				TextColor3={new Color3(1, 1, 1)}
-				TextScaled={true}
+				FontFace={
+					new Font("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Medium, Enum.FontStyle.Normal)
+				}
+				LayoutOrder={1}
+				Size={UDim2.fromScale(1, 1)}
+				Text={question}
+				TextColor3={Color3.fromRGB(200, 200, 200)}
+				TextSize={18}
+				TextTruncate={Enum.TextTruncate.AtEnd}
+				TextWrapped={true}
 				TextXAlignment={Enum.TextXAlignment.Left}
 			>
-				<uitextsizeconstraint key={"UITextSizeConstraint"} />
+				<uiflexitem key={"UIFlexItem"} FlexMode={Enum.UIFlexMode.Shrink} />
 			</textlabel>
 
-			<frame
-				AnchorPoint={new Vector2(0.5, 0.5)}
-				BackgroundTransparency={1}
-				key={"MultipleChoiceList"}
-				Position={UDim2.fromScale(0.186114, 0.619221)}
-				Size={UDim2.fromScale(0.302587, 0.555144)}
-			>
-				<uilistlayout key={"UIListLayout"} Padding={new UDim(0.02, 0)} SortOrder={Enum.SortOrder.LayoutOrder} />
+			<uicorner key={"UICorner"} CornerRadius={new UDim(0, 20)} />
+		</frame>
+	);
+}
 
-				{props.answers.map((question, index) => (
-					<frame
-						key={index}
-						AnchorPoint={new Vector2(0.5, 0.5)}
-						BackgroundTransparency={1}
-						Position={UDim2.fromScale(0.5, 0.11536)}
-						Size={UDim2.fromScale(1, 0.23072)}
-					>
-						<frame
-							AnchorPoint={new Vector2(0.5, 0.5)}
-							BackgroundTransparency={1}
-							key={"MultipleChoiceBorder" + index}
-							Position={UDim2.fromScale(0.0580142, 0.458322)}
-							Selectable={true}
-							Size={UDim2.fromScale(0.5, 0.5)}
-						>
-							<uicorner key={"UICorner"} CornerRadius={new UDim(1, 0)} />
-							<uistroke key={"UIStroke"} Color={new Color3(1, 1, 1)} />
+export default function MultipleChoiceFrame(props: MultipleChoiceFrame) {
+	const handleSelection = (answer: string) => {
+		props.nextQuestion(answer);
+	};
 
-							<uiaspectratioconstraint key={"UIAspectRatioConstraint"} AspectRatio={0.958869} />
+	return (
+		<frame
+			AutomaticSize={Enum.AutomaticSize.Y}
+			BackgroundTransparency={1}
+			key={"MultipleChoice"}
+			Size={UDim2.fromScale(1, 0)}
+		>
+			<uipadding
+				key={"UIPadding"}
+				PaddingBottom={new UDim(0, 2)}
+				PaddingLeft={new UDim(0, 2)}
+				PaddingRight={new UDim(0, 15)}
+				PaddingTop={new UDim(0, 2)}
+			/>
 
-							<frame
-								key={"MultipleChoiceDot" + index}
-								AnchorPoint={new Vector2(0.5, 0.5)}
-								BackgroundColor3={
-									selectedAnswer === question ? new Color3(1, 1, 1) : new Color3(0, 0, 0)
-								}
-								Position={UDim2.fromScale(0.5, 0.5)}
-								Selectable={true}
-								Size={UDim2.fromScale(0.51, 0.51)}
-							>
-								<uicorner key={"UICorner"} CornerRadius={new UDim(1, 0)} />
-								<uiaspectratioconstraint key={"UIAspectRatioConstraint"} AspectRatio={0.958869} />
+			<uilistlayout key={"UIListLayout"} Padding={new UDim(0, 10)} SortOrder={Enum.SortOrder.LayoutOrder} />
 
-								<uigradient
-									key={"UIGradient"}
-									Color={
-										new ColorSequence([
-											new ColorSequenceKeypoint(0, new Color3(1, 1, 1)),
-											new ColorSequenceKeypoint(1, new Color3()),
-										])
-									}
-									Rotation={90}
-								/>
-							</frame>
-
-							<textbutton
-								key={"TextButton" + index}
-								BackgroundTransparency={1}
-								FontFace={new Font("rbxasset://fonts/families/SourceSansPro.json")}
-								Size={UDim2.fromScale(1, 1)}
-								TextColor3={new Color3()}
-								TextSize={14}
-								TextTransparency={1}
-								Event={{ MouseButton1Click: () => handleSelection(question) }}
-							/>
-						</frame>
-
-						<textlabel
-							key={"MultipleChoiceLabel" + index}
-							AnchorPoint={new Vector2(1, 0.5)}
-							BackgroundTransparency={1}
-							FontFace={
-								new Font("rbxassetid://11702779409", Enum.FontWeight.Medium, Enum.FontStyle.Normal)
-							}
-							Position={UDim2.fromScale(3.056, 0.44)}
-							Size={UDim2.fromScale(2.863, 0.694)}
-							Text={question}
-							TextColor3={new Color3(1, 1, 1)}
-							TextScaled={true}
-							TextXAlignment={Enum.TextXAlignment.Left}
-						>
-							<uitextsizeconstraint key={"UITextSizeConstraint"} />
-						</textlabel>
-					</frame>
-				))}
-			</frame>
+			{props.answers.map((question, index) => (
+				<AnswerOption
+					key={`${props.id}-${index}`}
+					question={question}
+					index={index}
+					onSelect={handleSelection}
+				/>
+			))}
 		</frame>
 	);
 }

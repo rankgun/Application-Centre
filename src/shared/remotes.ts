@@ -1,5 +1,5 @@
 import { Client, createRemotes, loggerMiddleware, remote, Server } from "@rbxts/remo";
-import { StateMessage, tStateMessage, ApplicationCentre, ApiResponse, tApiResponse } from "./types";
+import { StateMessage, tStateMessage, ApiResponse, tApiResponse } from "./types";
 
 export const remotes = createRemotes(
 	{

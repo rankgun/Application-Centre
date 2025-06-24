@@ -6,85 +6,225 @@ interface NumberListFrame {
 
 export function NumberListFrame(props: NumberListFrame) {
 	return (
-		<frame
-			AnchorPoint={new Vector2(0.5, 0.5)}
-			BackgroundColor3={Color3.fromRGB(9, 9, 9)}
-			BackgroundTransparency={0.5}
-			key={"NumberListFrame"}
-			Position={UDim2.fromScale(0.557713, 0.787591)}
-			Size={UDim2.fromScale(0.966998, 0.376517)}
-		>
-			<uicorner key={"UICorner"} CornerRadius={new UDim(0.15, 0)} />
+ <frame
+        AutomaticSize={Enum.AutomaticSize.Y}
+        BackgroundTransparency={1}
+        key={"NumberSelectors"}
+        Size={UDim2.fromScale(1, 0)}
+    >
+        <frame
+            BackgroundTransparency={1}
+            key={"Idle"}
+            Size={new UDim2(1, 0, 0, 90)}
+        >
+            <textlabel
+                BackgroundTransparency={1}
+                FontFace={new Font(
+                    "rbxasset://fonts/families/GothamSSm.json",
+                    Enum.FontWeight.Medium,
+                    Enum.FontStyle.Normal
+                )}
+                LayoutOrder={1}
+                key={"Title"}
+                Size={new UDim2(1, 0, 0, 18)}
+                Text={"Price"}
+                TextColor3={Color3.fromRGB(150, 150, 150)}
+                TextSize={16}
+                TextWrapped={true}
+                TextXAlignment={Enum.TextXAlignment.Left}
+            />
 
-			<uistroke key={"UIStroke"} Color={new Color3(1, 1, 1)} Thickness={0.6} />
+            <textlabel
+                BackgroundTransparency={1}
+                FontFace={new Font(
+                    "rbxasset://fonts/families/GothamSSm.json",
+                    Enum.FontWeight.Medium,
+                    Enum.FontStyle.Normal
+                )}
+                LayoutOrder={3}
+                key={"Caption"}
+                Size={new UDim2(1, 0, 0, 14)}
+                Text={"Enter an amount in USD"}
+                TextColor3={Color3.fromRGB(100, 100, 100)}
+                TextSize={14}
+                TextWrapped={true}
+                TextXAlignment={Enum.TextXAlignment.Left}
+            />
 
-			<textlabel
-				AnchorPoint={new Vector2(0.5, 0.5)}
-				BackgroundTransparency={1}
-				FontFace={new Font("rbxassetid://11702779409", Enum.FontWeight.Bold, Enum.FontStyle.Normal)}
-				key={"QuestionMainText"}
-				Position={UDim2.fromScale(0.463247, 0.291639)}
-				Size={UDim2.fromScale(0.866034, 0.260868)}
-				Text={props.Question}
-				TextColor3={new Color3(1, 1, 1)}
-				TextScaled={true}
-				TextXAlignment={Enum.TextXAlignment.Left}
-			>
-				<uitextsizeconstraint key={"UITextSizeConstraint"} />
-			</textlabel>
+            <frame
+                BackgroundColor3={Color3.fromRGB(14, 14, 14)}
+                LayoutOrder={2}
+                key={"Input"}
+                Size={UDim2.fromScale(1, 1)}
+            >
+                <uiflexitem
+                    key={"UIFlexItem"}
+                    FlexMode={Enum.UIFlexMode.Shrink}
+                />
 
-			<frame
-				AnchorPoint={new Vector2(0.5, 0.5)}
-				BackgroundColor3={Color3.fromRGB(9, 9, 9)}
-				BackgroundTransparency={0.5}
-				key={"TextLine"}
-				Position={UDim2.fromScale(0.0737837, 0.703676)}
-				Size={UDim2.fromScale(0.0871082, 0.237897)}
-			>
-				<uicorner key={"UICorner"} CornerRadius={new UDim(0.15, 0)} />
+                <uicorner
+                    key={"UICorner"}
+                    CornerRadius={new UDim(0, 12)}
+                />
 
-				<uistroke key={"UIStroke"} Color={new Color3(1, 1, 1)} Thickness={0.6} />
+                <uistroke
+                    key={"UIStroke"}
+                    Color={Color3.fromRGB(40, 40, 40)}
+                />
 
-				<textbox
-					key={"TextBox"}
-					AnchorPoint={new Vector2(0.5, 0.5)}
-					BackgroundTransparency={1}
-					FontFace={new Font("rbxassetid://11702779409")}
-					PlaceholderColor3={Color3.fromRGB(166, 166, 166)}
-					PlaceholderText={"00"}
-					Position={UDim2.fromScale(0.5, 0.5)}
-					Size={UDim2.fromScale(0.968198, 1)}
-					Text={""}
-					TextColor3={new Color3(1, 1, 1)}
-					TextScaled={true}
-				>
-					<uitextsizeconstraint key={"UITextSizeConstraint"} MaxTextSize={30} />
-				</textbox>
-			</frame>
+                <uipadding
+                    key={"UIPadding"}
+                    PaddingLeft={new UDim(0, 16)}
+                />
 
-			<imagebutton
-				AnchorPoint={new Vector2(0.5, 0.5)}
-				BackgroundTransparency={1}
-				Image={"rbxassetid://76251084429205"}
-				key={"DeductButton"}
-				Position={UDim2.fromScale(0.151357, 0.699908)}
-				Size={UDim2.fromScale(0.0611511, 0.282494)}
-			>
-				<uiaspectratioconstraint key={"UIAspectRatioConstraint"} AspectRatio={1.29787} />
-			</imagebutton>
+                <textbox
+                    BackgroundTransparency={1}
+                    FontFace={new Font(
+                        "rbxasset://fonts/families/GothamSSm.json",
+                        Enum.FontWeight.Medium,
+                        Enum.FontStyle.Normal
+                    )}
+                    LayoutOrder={2}
+                    key={"Input"}
+                    PlaceholderColor3={Color3.fromRGB(100, 100, 100)}
+                    PlaceholderText={"Amount..."}
+                    Size={UDim2.fromScale(0.5, 1)}
+                    Text={""}
+                    TextColor3={Color3.fromRGB(200, 200, 200)}
+                    TextSize={14}
+                    TextXAlignment={Enum.TextXAlignment.Left}
+                >
+                    <uiflexitem
+                        key={"UIFlexItem"}
+                        FlexMode={Enum.UIFlexMode.Grow}
+                    />
+                </textbox>
 
-			<imagebutton
-				AnchorPoint={new Vector2(0.5, 0.5)}
-				BackgroundTransparency={1}
-				Image={"rbxassetid://127179147537583"}
-				key={"AddButton"}
-				Position={UDim2.fromScale(0.205301, 0.699908)}
-				Size={UDim2.fromScale(0.0611511, 0.282494)}
-			>
-				<uiaspectratioconstraint key={"UIAspectRatioConstraint"} AspectRatio={1.29787} />
-			</imagebutton>
+                <frame
+                    AnchorPoint={new Vector2(1, 0)}
+                    AutomaticSize={Enum.AutomaticSize.X}
+                    BackgroundTransparency={1}
+                    LayoutOrder={3}
+                    key={"Buttons"}
+                    Position={UDim2.fromScale(1, 0)}
+                    Size={UDim2.fromScale(0, 1)}
+                >
+                    <frame
+                        BackgroundTransparency={1}
+                        LayoutOrder={2}
+                        key={"Subtract"}
+                        Size={UDim2.fromScale(1, 1)}
+                    >
+                        <uiaspectratioconstraint key={"UIAspectRatioConstraint"} />
 
-			<uiaspectratioconstraint key={"UIAspectRatioConstraint"} AspectRatio={5.39657} />
-		</frame>
+                        <imagelabel
+                            key={"ImageLabel"}
+                            AnchorPoint={new Vector2(0.5, 0.5)}
+                            BackgroundTransparency={1}
+                            Image={"rbxassetid://79820908028644"}
+                            ImageColor3={Color3.fromRGB(150, 150, 150)}
+                            Position={UDim2.fromScale(0.5, 0.5)}
+                            Size={UDim2.fromOffset(16, 16)}
+                        />
+
+                        <textbutton
+                            BackgroundTransparency={1}
+                            FontFace={new Font("rbxasset://fonts/families/SourceSansPro.json")}
+                            key={"Trigger"}
+                            Size={UDim2.fromScale(1, 1)}
+                            Text={""}
+                            TextColor3={new Color3()}
+                            TextSize={14}
+                            TextTransparency={1}
+                        />
+                    </frame>
+
+                    <frame
+                        BackgroundColor3={Color3.fromRGB(40, 40, 40)}
+                        BorderColor3={new Color3()}
+                        BorderSizePixel={0}
+                        LayoutOrder={3}
+                        key={"Stroke"}
+                        Size={new UDim2(0, 1, 1, 0)}
+                    />
+
+                    <uilistlayout
+                        key={"UIListLayout"}
+                        FillDirection={Enum.FillDirection.Horizontal}
+                        HorizontalAlignment={Enum.HorizontalAlignment.Right}
+                        SortOrder={Enum.SortOrder.LayoutOrder}
+                        VerticalAlignment={Enum.VerticalAlignment.Center}
+                    />
+
+                    <frame
+                        BackgroundTransparency={1}
+                        LayoutOrder={4}
+                        key={"Add"}
+                        Size={UDim2.fromScale(1, 1)}
+                    >
+                        <uiaspectratioconstraint key={"UIAspectRatioConstraint"} />
+
+                        <imagelabel
+                            key={"ImageLabel"}
+                            AnchorPoint={new Vector2(0.5, 0.5)}
+                            BackgroundTransparency={1}
+                            Image={"rbxassetid://104874123202354"}
+                            ImageColor3={Color3.fromRGB(150, 150, 150)}
+                            Position={UDim2.fromScale(0.5, 0.5)}
+                            Size={UDim2.fromOffset(16, 16)}
+                        />
+
+                        <textbutton
+                            BackgroundTransparency={1}
+                            FontFace={new Font("rbxasset://fonts/families/SourceSansPro.json")}
+                            key={"Trigger"}
+                            Size={UDim2.fromScale(1, 1)}
+                            Text={""}
+                            TextColor3={new Color3()}
+                            TextSize={14}
+                            TextTransparency={1}
+                        />
+                    </frame>
+
+                    <frame
+                        BackgroundColor3={Color3.fromRGB(40, 40, 40)}
+                        BorderColor3={new Color3()}
+                        BorderSizePixel={0}
+                        LayoutOrder={1}
+                        key={"Stroke"}
+                        Size={new UDim2(0, 1, 1, 0)}
+                    />
+                </frame>
+
+                <uilistlayout
+                    key={"UIListLayout"}
+                    FillDirection={Enum.FillDirection.Horizontal}
+                    Padding={new UDim(0, 10)}
+                    SortOrder={Enum.SortOrder.LayoutOrder}
+                    VerticalAlignment={Enum.VerticalAlignment.Center}
+                />
+            </frame>
+
+            <uilistlayout
+                key={"UIListLayout"}
+                Padding={new UDim(0, 8)}
+                SortOrder={Enum.SortOrder.LayoutOrder}
+            />
+        </frame>
+
+        <uilistlayout
+            key={"UIListLayout"}
+            Padding={new UDim(0, 10)}
+            SortOrder={Enum.SortOrder.LayoutOrder}
+        />
+
+        <uipadding
+            key={"UIPadding"}
+            PaddingBottom={new UDim(0, 2)}
+            PaddingLeft={new UDim(0, 2)}
+            PaddingRight={new UDim(0, 15)}
+            PaddingTop={new UDim(0, 2)}
+        />
+    </frame>
 	);
 }

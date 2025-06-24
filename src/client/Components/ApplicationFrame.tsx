@@ -1,55 +1,101 @@
 import React from "@rbxts/react";
 
-export function ApplicationFrame(children: React.PropsWithChildren) {
+interface ApplicationFrame extends React.PropsWithChildren {
+	titleText: string;
+}
+
+export function ApplicationFrame(props: ApplicationFrame) {
 	return (
-		<frame
-			AnchorPoint={new Vector2(0.5, 0.5)}
-			BackgroundTransparency={1}
-			key={"ApplicationFrame"}
-			Position={UDim2.fromScale(0.499741, 0.507412)}
-			Size={UDim2.fromScale(0.469274, 0.398139)}
-			Visible={true}
-		>
+		<frame BackgroundTransparency={1} key={"Canvas"} Size={UDim2.fromScale(1, 1)}>
 			<uilistlayout
 				key={"UIListLayout"}
 				HorizontalAlignment={Enum.HorizontalAlignment.Center}
-				Padding={new UDim(0.04, 0)}
+				Padding={new UDim(0, 15)}
 				SortOrder={Enum.SortOrder.LayoutOrder}
 				VerticalAlignment={Enum.VerticalAlignment.Center}
 			/>
-
-			<textlabel
+			<frame
 				AnchorPoint={new Vector2(0.5, 0.5)}
 				BackgroundTransparency={1}
-				FontFace={new Font("rbxassetid://11702779409", Enum.FontWeight.Bold, Enum.FontStyle.Normal)}
-				key={"ApplicationText"}
-				Position={UDim2.fromScale(0.488217, 0.062234)}
-				Size={UDim2.fromScale(0.378806, 0.0851092)}
-				Text={"Application Centre"}
-				TextColor3={new Color3(1, 1, 1)}
-				TextScaled={true}
+				key={"Container"}
+				Position={UDim2.fromScale(0.5, 0.5)}
+				Size={UDim2.fromScale(0.75, 0.75)}
 			>
-				<uitextsizeconstraint key={"UITextSizeConstraint"} />
-			</textlabel>
+				<frame
+					AutomaticSize={Enum.AutomaticSize.Y}
+					BackgroundTransparency={1}
+					LayoutOrder={1}
+					key={"Header"}
+					Size={UDim2.fromScale(1, 0)}
+				>
+					<textlabel
+						AutomaticSize={Enum.AutomaticSize.Y}
+						BackgroundTransparency={1}
+						FontFace={
+							new Font(
+								"rbxasset://fonts/families/GothamSSm.json",
+								Enum.FontWeight.Medium,
+								Enum.FontStyle.Normal,
+							)
+						}
+						LayoutOrder={2}
+						key={"Title"}
+						Position={UDim2.fromScale(0, 0.215686)}
+						Size={UDim2.fromScale(1, 0)}
+						Text={props.titleText}
+						TextColor3={Color3.fromRGB(225, 225, 225)}
+						TextSize={40}
+						TextWrapped={true}
+						TextXAlignment={Enum.TextXAlignment.Left}
+					/>
 
-			<imagelabel
-				AnchorPoint={new Vector2(0.5, 0)}
-				BackgroundTransparency={1}
-				Image={"rbxassetid://90105815352619"}
-				key={"LineGradient"}
-				Position={UDim2.fromScale(0.499997, 0.125299)}
-				Size={UDim2.fromScale(0.700111, 0.0568915)}
-			>
-				<uiaspectratioconstraint key={"UIAspectRatioConstraint"} AspectRatio={75.75} />
-			</imagelabel>
+					<textlabel
+						AutomaticSize={Enum.AutomaticSize.XY}
+						BackgroundTransparency={1}
+						FontFace={
+							new Font(
+								"rbxasset://fonts/families/GothamSSm.json",
+								Enum.FontWeight.Medium,
+								Enum.FontStyle.Normal,
+							)
+						}
+						LayoutOrder={1}
+						key={"Eyebrow"}
+						Position={UDim2.fromScale(0.0020141, -0.0322581)}
+						Text={"Application Centre"}
+						TextColor3={Color3.fromRGB(100, 100, 100)}
+						TextSize={16}
+						TextXAlignment={Enum.TextXAlignment.Left}
+					/>
 
-			<uiaspectratioconstraint
-				key={"UIAspectRatioConstraint"}
-				AspectRatio={1.19}
-				AspectType={"ScaleWithParentSize"}
-				DominantAxis={"Width"}
-			/>
-			{children}
+					<uilistlayout
+						key={"UIListLayout"}
+						Padding={new UDim(0, 6)}
+						SortOrder={Enum.SortOrder.LayoutOrder}
+					/>
+
+					<uipadding key={"UIPadding"} PaddingRight={new UDim(0, 15)} />
+				</frame>
+				<uilistlayout key={"UIListLayout"} Padding={new UDim(0, 15)} SortOrder={Enum.SortOrder.LayoutOrder} />
+				<scrollingframe
+					Active={true}
+					AutomaticCanvasSize={Enum.AutomaticSize.Y}
+					BackgroundTransparency={1}
+					BottomImage={"rbxassetid://112215092531711"}
+					CanvasSize={new UDim2()}
+					LayoutOrder={2}
+					MidImage={"rbxassetid://72910408852056"}
+					key={"Pages"}
+					Position={UDim2.fromScale(0, 0.188192)}
+					ScrollBarImageColor3={Color3.fromRGB(40, 40, 40)}
+					ScrollBarThickness={3}
+					Size={UDim2.fromScale(1, 1)}
+					TopImage={"rbxassetid://126598680156839"}
+				>
+					<uiflexitem key={"UIFlexItem"} FlexMode={Enum.UIFlexMode.Shrink} />
+					{props.children}
+				</scrollingframe>
+			</frame>
 		</frame>
 	);
 }

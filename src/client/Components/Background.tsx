@@ -1,43 +1,16 @@
 import React from "@rbxts/react";
 
-interface BackgroundProps extends React.PropsWithChildren {
-	jobId: string;
-}
 
-function Background({ jobId, children }: BackgroundProps) {
+function Background({ children }: React.PropsWithChildren) {
 	return (
 		<frame
-			AnchorPoint={new Vector2(0.5, 0.5)}
-			BackgroundTransparency={1}
-			key={"RankGunUI"}
-			Position={UDim2.fromScale(0.5, 0.5)}
+			BackgroundColor3={Color3.fromRGB(12, 12, 12)}
+			BorderColor3={new Color3()}
+			BorderSizePixel={0}
+			key={"Background"}
 			Size={UDim2.fromScale(1, 1)}
+			ZIndex={0}
 		>
-			<textlabel
-				AnchorPoint={new Vector2(0.5, 0.5)}
-				BackgroundTransparency={1}
-				FontFace={new Font("rbxasset://fonts/families/RobotoMono.json")}
-				key={"ServerText"}
-				Position={UDim2.fromScale(0.817494, 0.0794543)}
-				Size={UDim2.fromScale(0.259283, 0.0283103)}
-				Text={`Server: ${jobId}`}
-				TextColor3={new Color3(1, 1, 1)}
-				TextScaled={true}
-				TextXAlignment={Enum.TextXAlignment.Right}
-			>
-				<uitextsizeconstraint key={"UITextSizeConstraint"} />
-			</textlabel>
-
-
-			<imagelabel
-				AnchorPoint={new Vector2(0.5, 0.5)}
-				BackgroundTransparency={1}
-				Image={"rbxassetid://100530871940279"}
-				key={"BackgroundGraphics"}
-				Position={UDim2.fromScale(0.5, 0.5)}
-				Size={UDim2.fromScale(1, 1)}
-				ZIndex={0}
-			/>
 			{children}
 		</frame>
 	);

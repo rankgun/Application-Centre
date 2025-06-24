@@ -30,23 +30,21 @@ export function ListScrollingFrame(props: listScrollingFrameProps) {
 	}, []);
 
 	return (
-		<scrollingframe
-			Active={true}
-			AnchorPoint={new Vector2(0.5, 0.5)}
+		<frame
+			AutomaticSize={Enum.AutomaticSize.Y}
 			BackgroundTransparency={1}
-			key={"ListScrollingFrame"}
-			Position={UDim2.fromScale(0.474563, 0.477407)}
-			ScrollBarThickness={2}
-			Size={UDim2.fromScale(1.5, 0.740803)}
+			key={"Applications"}
+			Size={UDim2.fromScale(1, 0)}
 		>
-			<uilistlayout
-				key={"UIListLayout"}
-				HorizontalAlignment={Enum.HorizontalAlignment.Center}
-				Padding={new UDim(0.02, 0)}
-				SortOrder={Enum.SortOrder.LayoutOrder}
+			<uipadding
+				key={"UIPadding"}
+				PaddingBottom={new UDim(0, 2)}
+				PaddingLeft={new UDim(0, 2)}
+				PaddingRight={new UDim(0, 15)}
+				PaddingTop={new UDim(0, 2)}
 			/>
 
-			<uipadding key={"UIPadding"} PaddingTop={new UDim(0.01, 0)} />
+			<uilistlayout key={"UIListLayout"} Padding={new UDim(0, 10)} SortOrder={Enum.SortOrder.LayoutOrder} />
 			{applications.map((applications) => (
 				<JobFrame
 					appId={applications.id}
@@ -56,6 +54,6 @@ export function ListScrollingFrame(props: listScrollingFrameProps) {
 					onClick={props.onClick}
 				/>
 			))}
-		</scrollingframe>
+		</frame>
 	);
 }

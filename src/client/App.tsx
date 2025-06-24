@@ -3,14 +3,11 @@ import { Application } from "shared/types";
 import { Background } from "./Components/Background";
 import { Success, Error } from "./Components/resultsFrame";
 import { ApplicationFrame } from "./Components/ApplicationFrame";
-import { JobFrame } from "./Components/JobFrame";
 import { ListScrollingFrame } from "./Components/ListScrollingFrame";
 import { remotes } from "shared/remotes";
-import { number } from "@rbxts/react/src/prop-types";
 import BannerNotify from "@rbxts/banner-notify";
 import MultipleChoiceFrame from "./Components/MultipleChoiceFrame";
-import NextFrame from "./Components/NextButton";
-import { Submit } from "./Components/SubmitButton";
+import { useMotion } from "client/hooks/use-motion";
 
 function shuffleArray<T>(array: T[]): T[] {
 	const copy = [...array];
@@ -26,11 +23,12 @@ function shuffleArray<T>(array: T[]): T[] {
 export default function App() {
 	const [appId, setAppId] = useState<string>("");
 	const [question, setQuestionNumber] = useState<number>(0);
+	const [titleText, setTitleText] = useState<string>("Select your application");
 	const [application, setApplication] = useState<Application | undefined>();
-	const [currentlySelectedAnswer, setSeletectedAnswer] = useState<string>("");
 	const [correctQuestions, setCorrectQuestions] = useState<number>(1);
 	const [shuffledAnswers, setShuffledAnswers] = useState<string[]>([]);
 	const [debounce, setDebounce] = useState<boolean>(false);
+	const [transferVisibility, transferVisibilityMotion] = useMotion(1);
 
 	useEffect(() => {
 		remotes.fetchCentre.request().then((response) => {
@@ -53,31 +51,17 @@ export default function App() {
 
 		const currentQ = application.questions[question];
 		const allAnswers = [currentQ.correctAnswer, ...currentQ.incorrectAnswers];
+		setTitleText(application.questions[question].question);
 
 		setShuffledAnswers(shuffleArray(allAnswers));
 	}, [application, question]);
-
-	function nextQuestionHandler() {
-		if (application === undefined) {
-			return;
-		}
-
-		if (currentlySelectedAnswer === application.questions[question].correctAnswer) {
-			setCorrectQuestions(correctQuestions + 1);
-		}
-
-		setQuestionNumber(question + 1);
-	}
 
 	function SubmitFunction() {
 		if (application === undefined || debounce === true) {
 			return;
 		}
+		transferVisibilityMotion.linear(0);
 		setDebounce(true);
-
-		if (currentlySelectedAnswer === application.questions[question].correctAnswer) {
-			setCorrectQuestions(correctQuestions + 1);
-		}
 
 		BannerNotify.Notify({
 			duration: 5,
@@ -89,30 +73,54 @@ export default function App() {
 		remotes.submitAnswers(correctQuestions, application.id);
 	}
 
+	function nextQuestionHandler(selectedAnswer: string) {
+		if (application === undefined) {
+			return;
+		}
+
+		if (selectedAnswer === application.questions[question].correctAnswer) {
+			setCorrectQuestions(correctQuestions + 1);
+		}
+
+		if (question + 1 === application.questions.size()) {
+			print("submit");
+			SubmitFunction();
+		} else {
+			setQuestionNumber(question + 1);
+		}
+	}
+
 	return (
-		<screengui IgnoreGuiInset={true}>
-			<Background jobId={game.JobId}>
-				<Success />
-				<Error />
-				<ApplicationFrame>
+		<screengui IgnoreGuiInset={true} ZIndexBehavior={"Sibling"}>
+			<Success />
+			<Error />
+			<Background>
+				<ApplicationFrame titleText={titleText}>
 					{!application ? (
-						<ListScrollingFrame onClick={(appId) => setAppId(appId)} />
+						<ListScrollingFrame
+							onClick={(appId) => {
+								setAppId(appId);
+							}}
+						/>
 					) : (
 						<>
 							<MultipleChoiceFrame
 								id={application.questions[question].id}
-								QuestionTitle={application.questions[question].question}
 								answers={shuffledAnswers}
-								onAnswerSelect={(selectedAnswer) => setSeletectedAnswer(selectedAnswer)}
+								nextQuestion={(selectedAnswer) => nextQuestionHandler(selectedAnswer)}
 							/>
-							{question + 1 === application.questions.size() ? (
-								<Submit onClick={SubmitFunction} />
-							) : (
-								<NextFrame onClick={nextQuestionHandler} />
-							)}
 						</>
 					)}
 				</ApplicationFrame>
+				<frame
+					BackgroundColor3={Color3.fromRGB(12, 12, 12)}
+					BorderColor3={new Color3()}
+					BorderSizePixel={0}
+					key={"Block"}
+					Transparency={transferVisibility}
+					Size={UDim2.fromScale(1, 1)}
+					ZIndex={3}
+				></frame>
 			</Background>
 		</screengui>
 	);

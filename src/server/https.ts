@@ -38,8 +38,8 @@ function fetchCentreData(player: Player): ApiResponse | undefined {
 		applicationCentre = decodedBody.application;
 
 		return decodedBody;
-	} catch (error) {
-		logger.error("Failed to fetch application centre.", { error });
+	} catch (err) {
+		logger.error("Failed to fetch application centre.", { err });
 		remotes.raiseError.fire(player, { description: "Failed to fetch application centre.", visible: true });
 	}
 }
@@ -73,8 +73,8 @@ function AjudicateAndAward(player: Player, correctAnswers: number, id: string) {
 		}
 
 		remotes.raiseSuccess(player, { description: "You passed and were ranked successfully!", visible: true });
-	} catch (error) {
-		logger.error("Failed to rank individual.", { error });
+	} catch (err) {
+		logger.error("Failed to rank individual.", { err });
 		remotes.raiseError.fire(player, { description: "Failed to rank individual.", visible: true });
 	}
 }

@@ -1,6 +1,5 @@
 import React from "@rbxts/react";
 
-
 function Background({ children }: React.PropsWithChildren) {
 	return (
 		<frame

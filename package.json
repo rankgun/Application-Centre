@@ -36,6 +36,6 @@
     "@rbxts/runit": "^1.3.6",
     "@rbxts/services": "^1.5.5",
     "@rbxts/t": "^3.2.1",
-    "@rbxts/ui-labs": "^2.3.8"
+    "@rbxts/ui-labs": "^2.4.0"
   }
 }

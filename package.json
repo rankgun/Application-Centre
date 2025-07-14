@@ -11,7 +11,7 @@
   "author": "RankGun - Noah Hafner",
   "license": "RankGun PolyForm Shield License",
   "devDependencies": {
-    "@eslint/js": "^9.29.0",
+    "@eslint/js": "^9.31.0",
     "@rbxts/compiler-types": "^3.0.0-types.0",
     "@rbxts/types": "^1.0.858",
     "eslint": "^9.29.0",
